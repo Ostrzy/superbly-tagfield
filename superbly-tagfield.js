@@ -63,6 +63,9 @@
         var inputItem = tagInput.parent();
         var tagList = inputItem.parent();
 
+        if(tagField.val() != '') {
+            preset = preset.concat(tagField.val().split(',').map(function(tag){ $.trim(tag) }));
+        }
         // set presets
         for(i in preset){
             addItem(preset[i]);
@@ -100,6 +103,7 @@
                 if(currentItem != null){
                     addItem(currentItem);
                 } else if(allowNewTags){
+                    tagInput.val($.trim(tagInput.val()));
                     var value = tagInput.val();
                     if(value != null && value != ''){
                         addItem(value);
