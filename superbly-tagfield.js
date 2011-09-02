@@ -9,10 +9,12 @@
  *
  * Date: Sun Apr 14 00:47:29 2011 -0500
  */
+
 (function($){
     $.fn.superblyTagField = function(userOptions) {
         var settings = {
             allowNewTags:true,
+            endTagKeyCodes:[13,9],
             showTagsNumber:10,
             preset:[],
             tags:[]
@@ -40,6 +42,7 @@
         var preset = settings.preset;
         var allowNewTags = settings.allowNewTags;
         var showTagsNumber = settings.showTagsNumber;
+        var endTagKeyCodes = settings.endTagKeyCodes;
 
         var tagstmp = tags.slice();
 
@@ -93,7 +96,7 @@
                 selectDown();
             }else if(e.keyCode == keyMap.upArrow) {
                 selectUp()
-            }else if(e.keyCode == keyMap.enter || e.keyCode == keyMap.tab) {
+            }else if($.inArray(e.keyCode, endTagKeyCodes) != -1) {
                 if(currentItem != null){
                     addItem(currentItem);
                 } else if(allowNewTags){
@@ -102,8 +105,7 @@
                         addItem(value);
                     }
                 }
-                // prevent default action for enter
-                return e.keyCode != keyMap.enter; 
+                return false;
             }else if(e.keyCode == keyMap.backspace){
                 // backspace
                 if(tagInput.val() == ''){
