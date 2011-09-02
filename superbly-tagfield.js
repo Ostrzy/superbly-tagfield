@@ -62,8 +62,7 @@
         var suggestList = tagInput.next();
         var inputItem = tagInput.parent();
         var tagList = inputItem.parent();
-
-        if(tagField.val() != '') {
+        if(tagField.length !== 0 && tagField.val() !== '') {
             preset = preset.concat(tagField.val().split(',').map(function(tag){ return $.trim(tag) }));
         }
         // set presets
